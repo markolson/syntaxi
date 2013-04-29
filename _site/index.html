@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Home</title>
+   <link rel="stylesheet" href="/assets/link/base.css" />
+   <link rel="stylesheet" href="/assets/link/code.css" />
+   <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li>Home</li>
+      <li>Archive</li>
+      <li>Projects</li>
+      <li>Twitter</li>
+      <li>Github</li>
+    </ul>
+  </nav>
+  <hr />
+</header>
+<div id="body">
+<div id="home">
+    
+    	<article>
+    		<h1><a href="/api/2013/04/20/so-why-don-t-twitter-direct-messages-sync.html">So Why Can't Twitter Keep Track of My Direct Messages?</a></h1>
+    		<blockquote class='twitter-tweet' data-conversation='none'><p>Remembering that a user has read a Twitter direct message is the hardest problem in computer science.</p>&mdash; Robin Ward (@evil_trout) <a href='https://twitter.com/evil_trout/status/317528358751711232'>March 29, 2013</a></blockquote>
+<p>I get annoyed when I read a Twitter Direct Message in my iPhone app, and the next time I open the website, it says I have a new Direct Message. And then when I open a Twitter app on another device, it&#8217;s still unread. I have to read the message over and over, even if I replied to it. How can it be 2013 and this is allowed to be the case? <strong><em>How?</em></strong></p>
+
+<p>The pre-emptive TL;DR for this is because the way Twitter gives apps (and the website) data through its API only care about what&#8217;s happening right now, and incidentally, what happened just before right now. There&#8217;s just no method to say &#8220;this is the last thing I read&#8221; in Twitter API-ese, and the way that Direct Messages are handled make it even more complex for apps to deal with.</p>
+    	</article>
+    
+    	<article>
+    		<h1><a href="/api/2013/03/24/exploring-kickstarters-api.html">Let's Explore Kickstarter's API</a></h1>
+    		<p>I like to save as many emails, pictures, chat logs, and other digital ephemera of my life as I can. I like that, more than just seeing the pictures from a skydiving trip, I have all the emails, facebook statuses, and tweets that went along with the event - it makes the story richer.</p>
+
+<p>As part of this hoarding, I decided I wanted a details about all of Kickstarter projects I backed, and went looking for an API I could use to pull the data down. Googling and digging through the site, all the data I could find were <a href='http://www.kickstarter.com/help/stats'>a simple year-on-year stats page</a> and some <a href='http://www.kickstarter.com/blog/categories/data'>blog posts</a> about milestones the service has hit. As it happens, Kickstarter does have an API - they just haven&#8217;t opened or documented it up yet.</p>
+
+<h2 id='finding_the_api'>Finding the API</h2>
+
+<p>Because it seemed like a safe place to start, I opened https://api.kickstarter.com, assuming that there would be a registration page, or maybe some docs. Alas, all I got was</p>
+
+<p>{%highlight javascript %} {&#8220;error_messages&#8221;:<span>&#8220;You are not authorized to access this resource.&#8221;</span>,&#8221;http_code&#8221;:401,&#8221;ksr_code&#8221;:&#8221;unauthorized&#8221;} {% endhighlight %}</p>
+
+<p>This is quite a bit better than nothing, as it tells me that there are resources I could potentially be authorized to access. And Kickstarter did just release <a href='http://www.kickstarter.com/blog/introducing-the-kickstarter-app-for-iphone-and-ipo'>their iPhone app</a> a month earlier, and that let me sign in, so that&#8217;s a good place to start. In the past, I&#8217;ve used <a href='http://www.charlesproxy.com'>Charles</a>, a &#8220;HTTP proxy / HTTP monitor / Reverse Proxy&#8221; to peek at traffic going between my phone and the internet, so I set it up once again and got to playing around with the app.</p>
+    	</article>
+    
+    	<article>
+    		<h1><a href="/2013/02/03/storyboard-updates-now-with-gifs-and-unicode.html">Storyboard - Now with more GIFs (and unicode)</a></h1>
+    		<h2 id='storyboard'>Storyboard</h2>
+
+<p>To say that I&#8217;m happy with the feedback I got about Storyboard would be a wild understatement. While I can&#8217;t turn the <a href='http://www.metafilter.com/124438/Storyboard-Make-video-files-into-PDF-books'>nice words</a> people said about it on metafilter or elsewhere into anything, I did work hard to add or improve things people had trouble with. Setup is still pretty complicated, but I do have ideas on how to make it better - those&#8217;ll be coming in another few weeks.</p>
+
+<p>In the meantime, I&#8217;ve added to and tried to improve the <a href='https://github.com/markolson/storyboard/blob/master/INSTALL.md'>setup instructions</a>.</p>
+
+<pre><code>storyboard --update</code></pre>
+
+<p>If that doesn&#8217;t work, please follow the normal <a href='https://github.com/markolson/storyboard/blob/master/INSTALL.md'>setup instructions</a>. If you have any troubles with them, please send me an email, get in touch with me <a href='http://twitter.com/mark_olson'>on twitter</a>, or <a href='https://github.com/markolson/storyboard/issues?state=open'>create an issue on github</a>. If you already have Storyboard, you should be able to update it:</p>
+
+<p>The main issue I wanted to fix this time around was that of improper subtitles. Relative to other metadata about video files, the sites that support subtitles are pretty spotty. To work around this, you&#8217;re presented with the list of all available subtitles that are returned for your video file. While the example below says that these are all subtitles that should work with this <em>exact</em> video file, the presence of the alternate pilot underscores the bad data that can come through.</p>
+
+<pre><code>$ storyboard &quot;Seinfeld 6x04.avi&quot;
+There are multiple subtitles that could work with this file. Please choose one!
+All of these are subtitles made for this exact video file, so any should work.
+1: &#39;Seinfeld - 6x04 - The Chinese Woman_eng.srt&#39;, added 2005-11-15 00:00:00
+2: &#39;Seinfeld [1x00] - Alternative Pilot - Good News, Bad News - FoV -.srt&#39;, added 2005-09-04 00:00:00
+choice (default 1):</code></pre>
+
+<h2 id='gifboard'>Gifboard</h2>
+<img src='/assets/media/storyboard/cape.gif' style='float: right; margin-left: 10px' width='300px' />
+<p>I only put a few hours of work into this, and it so it&#8217;s lacking a lof of options - most notably ones that could control the size and quality of the GIF. Along with not being able to specify exact time ranges, font colors, or other options I can&#8217;t think of right now, this makes the results pretty take-it-or-leave-it. Nevertheless, I can&#8217;t stop laughing at the GIF on the right, and so it passes muster with me.</p>
+
+<p>Instead of cramming more into Storyboard, I broke it out into a seperate applicaton: <strong>gifboard</strong>. Using it is pretty simple:</p>
+
+<pre><code>$ gifboard -t &quot;wearing a cape&quot; &quot;Seinfeld 6x04.avi&quot;</code></pre>
+
+<p>After prompting for which subtitle file to use, it will show the lines that match the text you searched for if there are multiple lines. If there&#8217;s just one match, it will use it without asking for confirmation. After you choose the line, it&#8217;ll spit out a GIF into the directory you ran <strong>gifboard</strong> from.</p>
+
+<pre><code>Multiple matches found.. pick one!
+1:  ...is he wearing a cape?
+2:  I believe he is wearing a cape.
+3:  Why was he wearing a cape?
+4:  Was my father wearing a cape?
+5:  They said you were with some guy
+    who was wearing a cape.
+6:  ...just because
+    they&#39;re wearing a cape.
+choice (default 1):</code></pre>
+
+<p>Gifboard is included in the Storyboard gem.</p>
+
+<h2 id='unicode'>Unicode</h2>
+
+<p>I&#8217;ll be upfront and say that I don&#8217;t understand unicode at any meaningful level. Nevertheless, I kept at it until I was able to render a subtitle file from a japanese show. I&#8217;m sure there are many issues left with it, but, it might maybe work. Please send me any feedback about how well it works for you.</p>
+    	</article>
+    
+    	<article>
+    		<h1><a href="/2013/01/20/storyboard.html">Storyboard</a></h1>
+    		<p><a href='https://github.com/markolson/storyboard'>Storyboard</a> was born of my insane desire to consume videos without actually having to watch them. Normally that would involve putting the TV on in the background and ignoring the video while listening to the audio, but what about the reverse? All visual without the audio. On my kindle.</p>
+
+<p>Storyboard is <strong>very</strong> much a work in progress, though it does work for most files that it has been tested against. Right now it will only create PDFs, but ePUB and Mobi are just a few commits away. The source <a href='https://github.com/markolson/storyboard'>is available on Github</a> where pull requests are gladly accepted, especially ones that deal with <a href='https://github.com/markolson/storyboard/issues'>open issues.</a> Even just hearing back that Storyboard did or didn&#8217;t work for a certain file can be of great help.</p>
+
+<h2 id='installing'>Installing</h2>
+
+<p>Storyboard requires Ruby 1.9.3, FFmpeg 1.1, and ImageMagick. For OSX, the <a href='https://github.com/markolson/storyboard/blob/master/INSTALL.md'>INSTALL file</a> has a lot more details, but if you already have a development environment setup, you shouldn&#8217;t have to do much.</p>
+
+<pre><code>brew update &amp;&amp; brew install ffmpeg imagemagick ghostscript libtool
+gem install storyboard</code></pre>
+
+<p>For Ubuntu, installing imagemagick and ghostscript from apt will work, but you need to <a href='http://ffmpeg.org/download.html'>download and compile ffmpeg</a> on your own for now.</p>
+
+<h2 id='using_storyboard'>Using Storyboard</h2>
+
+<p>From a terminal, just call <code>storyboard</code></p>
+
+<pre><code>storyboard &quot;Your Video File.mkv&quot;</code></pre>
+
+<p>Storyboard will then output a file named <code>Your Video File.pdf</code> in the directory you ran the command from. With non-HD content, this process can take just a minute or two for a 22 minute file, and the output file will be around 12MB.</p>
+
+<p>You can also pass in the path to a folder containing multiple video files, and Storyboard will process each one.</p>
+
+<pre><code>$ ls &quot;~/TV/ShowName/Season 1&quot;
+ShowName.1x01.EpisodeName.mkv    ShowName.1x02.AnotherEpisode.mkv
+$ storyboard &quot;~/TV/ShowName/Season 1&quot;
+[... ... ...]
+$ ls .
+ShowName.1x01.EpisodeName.pdf    ShowName.1x02.AnotherEpisode.pdf</code></pre>
+
+<h2 id='inner_workings'>Inner Workings</h2>
+
+<p>Storyboard has 2 phases to figuring out what&#8217;s important in a video file: First, FFmpeg&#8217;s ffprobe utility is used to scan for scene changes.</p>
+
+<pre><code>$ ffprobe -show_frames -of compact=p=0 -f lavfi &quot;movie=Your\ Video\ File.mkv,select=gt(scene\,.30)&quot; -pretty
+
+media_type=video|key_frame=1|pkt_pts=2290|pkt_pts_time=91.600000|pkt_dts=2290|pkt_dts_time=91.600000|pkt_duration=1|pkt_duration_time=0.040000|pkt_pos=10492324|pkt_size=N/A|width=576|height=432|pix_fmt=rgb24|sample_aspect_ratio=1:1|pict_type=I|coded_picture_number=0|display_picture_number=0|interlaced_frame=0|top_field_first=0|repeat_pict=0|reference=0|tag:lavfi.scene_score=0.340000
+media_type=video|key_frame=1|pkt_pts=2523|pkt_pts_time=100.920000|pkt_dts=2523|pkt_dts_time=100.920000|pkt_duration=1|pkt_duration_time=0.040000|pkt_pos=11511798|pkt_size=N/A|width=576|height=432|pix_fmt=rgb24|sample_aspect_ratio=1:1|pict_type=I|coded_picture_number=0|display_picture_number=0|interlaced_frame=0|top_field_first=0|repeat_pict=0|reference=0|tag:lavfi.scene_score=0.400000</code></pre>
+
+<p>Once the timestamps, seen in the <code>pkt_pts_time</code> field, are pulled out, it starts working on subtitles. Subtitles are either extracted from the file itself, found in the same directory, or downloaded based on information gleaned from the filename. Storyboard uses SRT subtitles, which have a general format of</p>
+
+<pre><code>32
+00:01:35,795 --&gt; 00:01:37,763
+That man he&#39;s with...
+
+33
+00:01:38,198 --&gt; 00:01:40,792
+...is he wearing a cape?
+
+34
+00:01:41,201 --&gt; 00:01:43,465
+I believe he is wearing a cape.</code></pre>
+
+<p>The timestamps (milliseconds after the comma, because the original author of SRT files was French) are combined with the timestamps that were collected from ffprobe. Once duplicates/very-near-misses are trimmed and a timeline is established, FFmpeg is again used, this time to extract the individual frames.</p>
+
+<pre><code>ffmpeg -ss #{frame.time - 1.second} -i &quot;Your Video File.mkv&quot; -vframes 1 -ss #{frame.time} output.jpg</code></pre>
+
+<p>The <code>-ss</code> (seek) flags tell FFmpeg to jump to a certain timestamp, and <code>-vframes 1</code> says to extract just one frame. Any seek used after a <code>vframes</code> moves one frame at a time unti the timestamp is reached, while any seek time before jumps &#8220;close to&#8221; the timestamp. By using two seeks, one to a second before where we really want to be, and then a second to slowly seek to exactly where we want, the frame extraction is greatly sped up.</p>
+
+<p>Finally, <a href='https://github.com/probablycorey/mini_magick'>mini_magick</a> (which in turns uses ImageMagick&#8217;s mogrify) is used to apply the subtitle text to each frame that falls in the subtitle timespans, and each frame is then added to a PDF using <a href='http://prawn.majesticseacreature.com'>prawn</a>.</p>
+
+<h2 id='a_few_more_details'>A Few More Details</h2>
+
+<p>You can also install mkvnixtools to enable subtitle extraction straight from the video file, but this is strictly optional.</p>
+
+<pre><code>brew install mkvtoolnix</code></pre>
+
+<p>Given a video file <code>Your Video File.mkv</code>, Storyboard would check for subtitles in 3 ways:</p>
+
+<ul>
+<li>Look in the same directory as the video for files named <code>Your Video File.mkv.srt</code> or <code>Your Video File.srt</code>.</li>
+
+<li>Run mkvtools and extract subtitles, if the tools are installed.</li>
+
+<li>Check several subtitle sites for a match of the exact video file, or a &#8220;best guess&#8221; on the name.</li>
+</ul>
+
+<p>If no subtitles can be found with those methods, you can pass in the path to a SRT file using the <code>-s</code> option.</p>
+
+<pre><code>storyboard -s ~/subtitles/my-video-file.srt &quot;Your Video File.mkv&quot;</code></pre>
+
+<p>Other options available are <code>-v</code> for more detailed output and <code>--no-scenes</code>, which will skip scene detection. Skipping scene detection will speed up processing by around a third, but only frames from the subtitle timings will be in the output, meaning that you could miss out on context.</p>
+    	</article>
+    
+    	<article>
+    		<h1><a href="/chef/ssh/2013/01/02/ssh-known-hosts-in-chef.html">SSH Authentication with Chef</a></h1>
+    		<h2 id='ssh_known_hosts_and_chef'>SSH known_hosts and Chef</h2>
+
+<p>A problem that the documentation for Chef&#8217;s <a href='http://wiki.opscode.com/display/chef/Deploy+Resource'>Deploy_resource</a> talks about is a Chef run pausing while a program it runs waits for user input. One way this presents itself is with SSH&#8217;s host fingerprint checking, which ensures that the host you&#8217;re connecting to now is the same host you connected to earlier. When first connecting to a host with anything that runs over SSH, you&#8217;ll see something like this:</p>
+
+<pre><code>root@precise64:/tmp# git clone git@github.com:rails/rails.git
+Cloning into &#39;rails&#39;...
+The authenticity of host &#39;github.com (207.97.227.239)&#39; can&#39;t be established.
+RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+Are you sure you want to continue connecting (yes/no)?</code></pre>
+
+<p>Chef can&#8217;t type &#8216;yes&#8217; for this, and so it waits. And waits. The second issue that can come up is having a keyphrase on the SSH key. Normally, this is a very good idea, but it just doesn&#8217;t work well with automated deployments because, again, it prompts for input.</p>
+
+<p>To get around this, The Chef docs recommend creating a wrapper around SSH called <code>wrap-ssh4git.sh</code> which disables Strict Host Checking and tells SSH to use a key that has had it&#8217;s keyphrase removed. While there&#8217;s no <em>good</em> way to use a keyphrase protected key, we can use SSH&#8217;s built in tools to add hosts to the <code>known_hosts</code> file that SSH consults when connecting.</p>
+
+<h2 id='adding_to_known_hosts'>Adding to known_hosts</h2>
+
+<p>SSH includes a program called <a href='http://linux.die.net/man/1/ssh-keyscan'>ssh-keyscan</a> that we can use to add entries to our <code>known_hosts</code> file.</p>
+
+<pre><code>root@precise64:/tmp# ssh-keyscan -H github.com
+# github.com SSH-2.0-OpenSSH_5.5p1 Debian-6+squeeze1+github8
+|1|7+BJH9KqHv6AMzOna9ewgQjgdP0=|lpk0k7TfHbt/QTIbvX28s61Bm8I= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==</code></pre>
+
+<p>Recent versions of SSH hash the hostname in <code>known_hosts</code>, which makes it harder for an intruder to get a list of hosts that the system presumably has access to, but it also makes it harder for us to find where <a href='http://github.com'>github.com</a> is in that list. To see if your system hashes the <code>known_hosts</code> file, open up the system&#8217;s <code>ssh_config</code> file (mine was at <code>/etc/ssh/ssh_config</code>) and look for <code>HashKnownHosts yes</code>. That <code>-H</code> flag on <code>ssh-keyscan</code> toggles whether to hash the output, and then we can dump it into the <code>known_files</code></p>
+
+<pre><code>ssh-keygen -H -F github.com &gt;&gt; ~/.ssh/known_hosts</code></pre>
+
+<h2 id='chefssh_cookbook'>Chef-SSH Cookbook</h2>
+
+<p>To make this process simpler for myself, I wrote a <a href='https://github.com/markolson/chef-ssh'>Chef cookbook</a> that adds a feature letting you do the following:</p>
+
+<pre><code>ssh_known_hosts &quot;github.com&quot; do
+  hashed true
+  user &#39;webapp&#39;
+end</code></pre>
+
+<p>You can install it simply by running <code>knife cookbook download ssh-util</code>, and the <a href='https://github.com/markolson/chef-ssh/blob/master/README.md'>README</a> has more details about the options available.</p>
+
+<h2 id='ssh_config'>SSH Config</h2>
+
+<p>I use seperate keys to authenticate against different services, including a unique (keyphraseless) key just for github. SSH reads from configuration files before connecting, which lets you specify seperate options for different hosts. The per-user file is normally kept at &#8216;~/.ssh/config&#8217;, and documentation for <a href='http://www.openbsd.org/cgi-bin/man.cgi?query=ssh_config'>SSH Config</a> could be better, in practice they&#8217;re simple enough</p>
+
+<pre><code>Host github.com
+  User git
+  IdentityFile ~/.ssh/github.pem</code></pre>
+
+<p>Anything connects over SSH will now check if it&#8217;s connecting to &#8216;github.com&#8217;, and if so, will use the file <code>~/.ssh/github.pem</code> instead of the default <code>~/.ssh/id_rsa</code>. Included in the <a href='https://github.com/markolson/chef-ssh'>cookbook</a> is a resource to manage options in <code>ssh_config</code> files.</p>
+
+<pre><code>ssh_config &quot;github.com&quot; do
+  options &#39;User&#39; =&gt; &#39;git&#39;, &#39;IdentityFile&#39; =&gt; &#39;~/.ssh/github.pem&#39;
+  user &#39;webapp&#39;
+end</code></pre>
+
+<h2 id='deploy_revision'>Deploy Revision</h2>
+
+<p>Presuming that the <code>github.pem</code> file exists on the system, and with github added to our <code>known_hosts</code>, plus the entry <code>ssh_config</code> file, Chef can run deploy revision as <code>webapp</code> without any interruptions.</p>
+
+<pre><code>deploy &quot;private_repo&quot; do
+  repo &quot;git@github.com:acctname/private-repo.git&quot;
+  user &quot;webapp&quot;
+  deploy_to &quot;/tmp/private_code&quot;
+  action :deploy
+end</code></pre>
+    	</article>
+    
+    	<article>
+    		<h1><a href="/rvm/2012/12/21/installing-binaries-in-rvm.html">Installing Prebuilt Binaries with RVM</a></h1>
+    		<p>I&#8217;ve been working with a lot of virtual machines lately, and using RVM to install the version of ruby I need took longer than installing the base system. If you go through the motions of <code>rvm install {VERSION}</code>, you might just gloss over this message:</p>
+
+<blockquote>
+<p>No binary rubies available for: ubuntu/12.04/x86_64/{VERSION}.<br /> Continuing with compilation. Please read &#8216;rvm mount&#8217; to get more information on binary rubies.</p>
+</blockquote>
+
+<p>Not reading the documentation for <code>rvm mount</code> might end up costing you a lot of time.</p>
+    	</article>
+    
+ </div>
+</div>
+</body>
+</html>

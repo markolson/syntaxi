@@ -1,0 +1,94 @@
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+a { 
+	color: #206ebc;
+	text-decoration: none;
+}
+
+body {
+	
+	font-family: 'Lato', sans-serif;
+}
+
+header {
+	background-image: url(/assets/img/header.1.small.jpg);
+	height: 180px;
+	background-position: top center;
+	background-size: auto;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-color: #7a7a7a;
+}
+
+header nav {
+	text-align: center;
+	opacity: 0.6;
+}
+
+header ul {
+	list-style-type: none;
+	background-color: white;
+	padding: 15px;
+}
+
+header ul li {
+	display: inline;
+	list-style-type: none;
+	margin: 0px 15px 0px 15px;
+}
+
+hr {
+	background-color: white;
+	height: 6px;
+	margin: 0px;
+	border: 0px;
+}
+
+#home {
+	width: 950px;
+	margin: 10px auto;
+}
+
+article {
+	width: 940px;
+	margin: 20px 0px;
+}
+
+article p, article blockquote, .highlight pre {
+	margin-bottom: 1em;
+	line-height: 1.1em;
+}
+
+p > code {
+	background-color: #efefef;
+}
+
+blockquote, .highlight > pre {
+	padding: 14px;
+	margin-left: 10px;
+	border-left: 4px solid #4F7688;
+	background-color: #eee;
+	overflow:scroll;
+}
+
+blockquote p { margin-bottom: 0px; }
+
+article h1 {
+	font-size: 1.8em;
+	border-bottom: 1px solid #ddd;
+}
+
+article h2 {
+	font-size: 1.3em;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 1em;
+}
+
+code {
+	font-size: 0.9em;
+}
+
+code.bash, code.text {
+	font-family: Courier;
+}

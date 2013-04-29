@@ -1,13 +1,12 @@
 safe:        false
-auto:        false
-server:      false
-
 source:      .
 destination: ./_site
 plugins:     ./_plugins
 
+excerpt_separator: "<!-- more -->"
+
 future:      true
 lsi:         false
-pygments:    false
+pygments:    true
 markdown:    maruku
 permalink:   date
