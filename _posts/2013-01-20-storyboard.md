@@ -33,6 +33,8 @@ From a terminal, just call `storyboard`
 
 Storyboard will then output a file named `Your Video File.pdf` in the directory you ran the command from. With non-HD content, this process can take just a minute or two for a 22 minute file, and the output file will be around 12MB.
 
+<!-- more -->
+
 You can also pass in the path to a folder containing multiple video files, and Storyboard will process each one.
 
     $ ls "~/TV/ShowName/Season 1"

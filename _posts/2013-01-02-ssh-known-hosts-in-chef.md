@@ -26,7 +26,7 @@ A problem that the documentation for Chef's [Deploy_resource](http://wiki.opscod
 Chef can't type 'yes' for this, and so it waits. And waits. The second issue that can come up is having a keyphrase on the SSH key. Normally, this is a very good idea, but it just doesn't work well with automated deployments because, again, it prompts for input.
 
 To get around this, The Chef docs recommend creating a wrapper around SSH called `wrap-ssh4git.sh` which disables Strict Host Checking and tells SSH to use a key that has had it's keyphrase removed. While there's no *good* way to use a keyphrase protected key, we can use SSH's built in tools to add hosts to the `known_hosts` file that SSH consults when connecting.
-
+<!-- more -->
 ## Adding to known_hosts
 
 SSH includes a program called [ssh-keyscan](http://linux.die.net/man/1/ssh-keyscan) that we can use to add entries to our `known_hosts` file.

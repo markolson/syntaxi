@@ -10,6 +10,7 @@ categories: ['api']
 I get annoyed when I read a Twitter Direct Message in my iPhone app, and the next time I open the website, it says I have a new Direct Message. And then when I open a Twitter app on another device, it's still unread. I have to read the message over and over, even if I replied to it. How can it be 2013 and this is allowed to be the case? <strong><em>How?</em></strong>
 
 The pre-emptive TL;DR for this is because the way Twitter gives apps (and the website) data through its API only care about what's happening right now, and incidentally, what happened just before right now. There's just no method to say "this is the last thing I read" in Twitter API-ese, and the way that Direct Messages are handled make it even more complex for apps to deal with.
+
 <!-- more -->
 
 ## The Twitter API

@@ -7,16 +7,13 @@ versions:
     version: 0.5.0
 
 ---
-
-## Storyboard
-
 To say that I'm happy with the feedback I got about Storyboard would be a wild understatement. While I can't turn the <a href="http://www.metafilter.com/124438/Storyboard-Make-video-files-into-PDF-books">nice words</a> people said about it on metafilter or elsewhere into anything, I did work hard to add or improve things people had trouble with. Setup is still pretty complicated, but I do have ideas on how to make it better - those'll be coming in another few weeks.
 
 In the meantime, I've added to and tried to improve the <a href="https://github.com/markolson/storyboard/blob/master/INSTALL.md">setup instructions</a>.
 
-    storyboard --update
-
 If that doesn't work, please follow the normal <a href="https://github.com/markolson/storyboard/blob/master/INSTALL.md">setup instructions</a>.  If you have any troubles with them, please send me an email, get in touch with me <a href="http://twitter.com/mark_olson">on twitter</a>, or <a href="https://github.com/markolson/storyboard/issues?state=open">create an issue on github</a>. If you already have Storyboard, you should be able to update it:
+
+    storyboard --update
 
 The main issue I wanted to fix this time around was that of improper subtitles. Relative to other metadata about video files, the sites that support subtitles are pretty spotty. To work around this, you're presented with the list of all available subtitles that are returned for your video file. While the example below says that these are all subtitles that should work with this *exact* video file, the presence of the alternate pilot underscores the bad data that can come through.
 
@@ -36,7 +33,7 @@ I only put a few hours of work into this, and it so it's lacking a lof of option
 Instead of cramming more into Storyboard, I broke it out into a seperate applicaton: **gifboard**. Using it is pretty simple:
 
     $ gifboard -t "wearing a cape" "Seinfeld 6x04.avi"
-
+<!-- more -->
 After prompting for which subtitle file to use, it will show the lines that match the text you searched for if there are multiple lines. If there's just one match, it will use it without asking for confirmation. After you choose the line, it'll spit out a GIF into the directory you ran **gifboard** from.
 
     Multiple matches found.. pick one!
