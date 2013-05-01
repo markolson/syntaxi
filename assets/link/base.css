@@ -13,7 +13,8 @@ body {
 
 header {
 	background-image: url(/assets/img/header.1.small.jpg);
-	height: 180px;
+	margin-bottom: 6px;
+	height: 140px;
 	background-position: top center;
 	background-size: auto;
 	background-attachment: fixed;
@@ -26,6 +27,10 @@ header nav {
 	opacity: 0.6;
 }
 
+header a {
+	font-size: 1.1em;
+}
+
 header ul {
 	list-style-type: none;
 	background-color: white;
@@ -35,7 +40,12 @@ header ul {
 header ul li {
 	display: inline;
 	list-style-type: none;
-	margin: 0px 15px 0px 15px;
+	margin: 0px 15px 0px 0px;
+	width: 180px;
+}
+
+header ul li a {
+	font-size: 1.5em;
 }
 
 hr {
@@ -45,14 +55,28 @@ hr {
 	border: 0px;
 }
 
+#body {
+	background-color: #fbfbfb; 
+}
+
 #home {
 	width: 950px;
-	margin: 10px auto;
+	margin: 0px auto;
+	padding-top: 6px;
+	padding-bottom: 20px;
 }
 
 article {
 	width: 940px;
 	margin: 20px 0px;
+	border: 1px solid #dedede;
+	background-color: #f6f6f6;
+	border-radius: 3px;
+}
+
+article .content {
+	padding: 5px;
+	background-color: #fff;
 }
 
 article p, article blockquote, .highlight pre {
@@ -76,7 +100,19 @@ blockquote p { margin-bottom: 0px; }
 
 article h1 {
 	font-size: 1.8em;
+	text-align: center;
+	margin-top: 3px;
+	padding-bottom: 7px;
 	border-bottom: 1px solid #ddd;
+}
+
+article h1 a {
+	display: block;
+}
+
+article h1 time {
+	color: gray;
+	font-size: 0.5em;
 }
 
 article h2 {

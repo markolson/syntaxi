@@ -5,37 +5,51 @@
    <title>Home</title>
    <link rel="stylesheet" href="/assets/link/base.css" />
    <link rel="stylesheet" href="/assets/link/code.css" />
+   <link rel="stylesheet" href="/assets/link/social.css" />
    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <header>
   <nav>
     <ul>
-      <li>Home</li>
-      <li>Archive</li>
-      <li>Projects</li>
-      <li>Twitter</li>
-      <li>Github</li>
+      <li><a href="/">Notes</a></li>
+      <li><a href="/archive">Archives</a></li>
+      <li><a href="/card">Side Projects</a></li>
+      <li class="social"><a href="https://twitter.com/mark_olson" target="_blank" title="Mark Olson" class="icon-twitter"></a></li>
+      <li class="social"><a href="https://github.com/markolson" target="_blank" title="Mark Olson" class="icon-github"></a></li>
     </ul>
   </nav>
   <hr />
 </header>
 <div id="body">
 <div id="home">
+	<section class="tinyprojects">
+
+	</section>
+
     
     	<article>
-    		<h1><a href="/api/2013/04/20/so-why-don-t-twitter-direct-messages-sync.html">So Why Can't Twitter Keep Track of My Direct Messages?</a></h1>
-    		<blockquote class="twitter-tweet" data-conversation="none"><p>Remembering that a user has read a Twitter direct message is the hardest problem in computer science.</p>&mdash; Robin Ward (@evil_trout) <a href="https://twitter.com/evil_trout/status/317528358751711232">March 29, 2013</a></blockquote>
+    		<h1>
+    			<time>20 April 2013</time>
+    			<a href="/2013/04/20/so-why-don-t-twitter-direct-messages-sync">So Why Can't Twitter Keep Track of My Direct Messages?</a>
+    		</h1>
+    		<div class="content">
+    			<blockquote class="twitter-tweet" data-conversation="none"><p>Remembering that a user has read a Twitter direct message is the hardest problem in computer science.</p>&mdash; Robin Ward (@evil_trout) <a href="https://twitter.com/evil_trout/status/317528358751711232">March 29, 2013</a></blockquote>
 
 <p>I get annoyed when I read a Twitter Direct Message in my iPhone app, and the next time I open the website, it says I have a new Direct Message. And then when I open a Twitter app on another device, it&#39;s still unread. I have to read the message over and over, even if I replied to it. How can it be 2013 and this is allowed to be the case? <strong><em>How?</em></strong></p>
 
 <p>The pre-emptive TL;DR for this is because the way Twitter gives apps (and the website) data through its API only care about what&#39;s happening right now, and incidentally, what happened just before right now. There&#39;s just no method to say &quot;this is the last thing I read&quot; in Twitter API-ese, and the way that Direct Messages are handled make it even more complex for apps to deal with.</p>
 
+    		</div>
     	</article>
     
     	<article>
-    		<h1><a href="/api/2013/03/24/exploring-kickstarters-api.html">Let's Explore Kickstarter's API</a></h1>
-    		<p>I like to save as many emails, pictures, chat logs, and other digital ephemera of my life as I can. I like that, more than just seeing the pictures from a skydiving trip, I have all the emails, facebook statuses, and tweets that went along with the event - it makes the story richer.</p>
+    		<h1>
+    			<time>24 March 2013</time>
+    			<a href="/2013/03/24/let-s-explore-kickstarter-s-api">Let's Explore Kickstarter's API</a>
+    		</h1>
+    		<div class="content">
+    			<p>I like to save as many emails, pictures, chat logs, and other digital ephemera of my life as I can. I like that, more than just seeing the pictures from a skydiving trip, I have all the emails, facebook statuses, and tweets that went along with the event - it makes the story richer.</p>
 
 <p>As part of this hoarding, I  decided I wanted a details about all of Kickstarter projects I backed, and went looking for an API I could use to pull the data down. Googling and digging through the site, all the data I could find were <a href="http://www.kickstarter.com/help/stats">a simple year-on-year stats page</a> and some <a href="http://www.kickstarter.com/blog/categories/data">blog posts</a> about milestones the service has hit. As it happens, Kickstarter does have an API - they just haven&#39;t opened or documented it up yet.</p>
 
@@ -46,11 +60,16 @@
 </code></pre></div>
 <p>This is quite a bit better than nothing, as it tells me that there are resources I could potentially be authorized to access. </p>
 
+    		</div>
     	</article>
     
     	<article>
-    		<h1><a href="/2013/02/03/storyboard-updates-now-with-gifs-and-unicode.html">Storyboard - Now with more GIFs (and unicode)</a></h1>
-    		<p>To say that I&#39;m happy with the feedback I got about Storyboard would be a wild understatement. While I can&#39;t turn the <a href="http://www.metafilter.com/124438/Storyboard-Make-video-files-into-PDF-books">nice words</a> people said about it on metafilter or elsewhere into anything, I did work hard to add or improve things people had trouble with. Setup is still pretty complicated, but I do have ideas on how to make it better - those&#39;ll be coming in another few weeks.</p>
+    		<h1>
+    			<time>03 February 2013</time>
+    			<a href="/2013/02/03/storyboard-updates-now-with-gifs-and-unicode">Storyboard - Now with more GIFs (and unicode)</a>
+    		</h1>
+    		<div class="content">
+    			<p>To say that I&#39;m happy with the feedback I got about Storyboard would be a wild understatement. While I can&#39;t turn the <a href="http://www.metafilter.com/124438/Storyboard-Make-video-files-into-PDF-books">nice words</a> people said about it on metafilter or elsewhere into anything, I did work hard to add or improve things people had trouble with. Setup is still pretty complicated, but I do have ideas on how to make it better - those&#39;ll be coming in another few weeks.</p>
 
 <p>In the meantime, I&#39;ve added to and tried to improve the <a href="https://github.com/markolson/storyboard/blob/master/INSTALL.md">setup instructions</a>.</p>
 
@@ -74,11 +93,16 @@ choice (default 1):
 <p>Instead of cramming more into Storyboard, I broke it out into a seperate applicaton: <strong>gifboard</strong>. Using it is pretty simple:</p>
 <div class="highlight"><pre><code class="text">$ gifboard -t &quot;wearing a cape&quot; &quot;Seinfeld 6x04.avi&quot;
 </code></pre></div>
+    		</div>
     	</article>
     
     	<article>
-    		<h1><a href="/2013/01/20/storyboard.html">Storyboard</a></h1>
-    		<p><a href="https://github.com/markolson/storyboard">Storyboard</a> was born of my insane desire to consume videos without actually having to watch them. Normally that would involve putting the TV on in the background and ignoring the video while listening to the audio, but what about the reverse? All visual without the audio. On my kindle.</p>
+    		<h1>
+    			<time>20 January 2013</time>
+    			<a href="/2013/01/20/storyboard">Storyboard</a>
+    		</h1>
+    		<div class="content">
+    			<p><a href="https://github.com/markolson/storyboard">Storyboard</a> was born of my insane desire to consume videos without actually having to watch them. Normally that would involve putting the TV on in the background and ignoring the video while listening to the audio, but what about the reverse? All visual without the audio. On my kindle.</p>
 
 <p>Storyboard is <strong>very</strong> much a work in progress, though it does work for most files that it has been tested against. Right now it will only create PDFs, but ePUB and Mobi are just a few commits away. The source <a href="https://github.com/markolson/storyboard">is available on Github</a> where pull requests are gladly accepted, especially ones that deal with <a href="https://github.com/markolson/storyboard/issues">open issues.</a> Even just hearing back that Storyboard did or didn&#39;t work for a certain file can be of great help.</p>
 
@@ -97,11 +121,16 @@ gem install storyboard
 </code></pre></div>
 <p>Storyboard will then output a file named <code>Your Video File.pdf</code> in the directory you ran the command from. With non-HD content, this process can take just a minute or two for a 22 minute file, and the output file will be around 12MB.</p>
 
+    		</div>
     	</article>
     
     	<article>
-    		<h1><a href="/chef/ssh/2013/01/02/ssh-known-hosts-in-chef.html">SSH Authentication with Chef</a></h1>
-    		<h2>SSH known_hosts and Chef</h2>
+    		<h1>
+    			<time>02 January 2013</time>
+    			<a href="/2013/01/02/ssh-known-hosts-in-chef">SSH Authentication with Chef</a>
+    		</h1>
+    		<div class="content">
+    			<h2>SSH known_hosts and Chef</h2>
 
 <p>A problem that the documentation for Chef&#39;s <a href="http://wiki.opscode.com/display/chef/Deploy+Resource">Deploy_resource</a> talks about is a Chef run pausing while a program it runs waits for user input. One way this presents itself is with SSH&#39;s host fingerprint checking, which ensures that the host you&#39;re connecting to now is the same host you connected to earlier.  When first connecting to a host with anything that runs over SSH, you&#39;ll see something like this:</p>
 <div class="highlight"><pre><code class="text">root@precise64:/tmp# git clone git@github.com:rails/rails.git
@@ -114,16 +143,22 @@ Are you sure you want to continue connecting (yes/no)?
 
 <p>To get around this, The Chef docs recommend creating a wrapper around SSH called <code>wrap-ssh4git.sh</code> which disables Strict Host Checking and tells SSH to use a key that has had it&#39;s keyphrase removed. While there&#39;s no <em>good</em> way to use a keyphrase protected key, we can use SSH&#39;s built in tools to add hosts to the <code>known_hosts</code> file that SSH consults when connecting.</p>
 
+    		</div>
     	</article>
     
     	<article>
-    		<h1><a href="/rvm/2012/12/21/installing-binaries-in-rvm.html">Installing Prebuilt Binaries with RVM</a></h1>
-    		<p>I&#39;ve been working with a lot of virtual machines lately, and using RVM to install the version of ruby I need took longer than installing the base system. If you go through the motions of <code>rvm install {VERSION}</code>, you might just gloss over this message:</p>
+    		<h1>
+    			<time>21 December 2012</time>
+    			<a href="/2012/12/21/installing-binaries-in-rvm">Installing Prebuilt Binaries with RVM</a>
+    		</h1>
+    		<div class="content">
+    			<p>I&#39;ve been working with a lot of virtual machines lately, and using RVM to install the version of ruby I need took longer than installing the base system. If you go through the motions of <code>rvm install {VERSION}</code>, you might just gloss over this message:</p>
 <div class="highlight"><pre><code class="text">No binary rubies available for: ubuntu/12.04/x86_64/{VERSION}.&lt;br /&gt;
 Continuing with compilation. Please read &#39;rvm mount&#39; to get more information on binary rubies.
 </code></pre></div>
 <p>Not reading the documentation for <code>rvm mount</code> might end up costing you a lot of time.</p>
 
+    		</div>
     	</article>
     
  </div>

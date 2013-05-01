@@ -1,0 +1,116 @@
+/*
+  Font Custom - icon webfonts made simple
+*/
+
+@font-face {
+  font-family: "socialicons";
+  src: url("/assets/font/social-icon-font.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*
+  Bootstrap Overrides
+*/
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "socialicons";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+a [class^="icon-"], a [class*=" icon-"] {
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+/* makes the font 33% larger relative to the icon container */
+.icon-large:before {
+  vertical-align: top;
+  font-size: 1.333em;
+}
+
+/* keeps button heights with and without icons the same */
+.btn [class^="icon-"], .btn [class*=" icon-"] {
+  line-height: 0.9em;
+}
+
+li [class^="icon-"], li [class*=" icon-"] {
+  display: inline-block;
+  width: 1.25em;
+  text-align: center;
+}
+
+/* 1.5 increased font size for icon-large * 1.25 width */
+li .icon-large[class^="icon-"], li .icon-large[class*=" icon-"] {
+  width: 1.875em;
+}
+
+li[class^="icon-"], li[class*=" icon-"] {
+  margin-left: 0;
+  list-style-type: none;
+}
+
+li[class^="icon-"]:before, li[class*=" icon-"]:before {
+  text-indent: -2em;
+  text-align: center;
+}
+
+li[class^="icon-"].icon-large:before, li[class*=" icon-"].icon-large:before {
+  text-indent: -1.333em;
+}
+
+/*
+  Icon Classes
+*/
+
+.icon-aim:before { content: "\f100"; }
+.icon-amazon:before { content: "\f101"; }
+.icon-appstore:before { content: "\f102"; }
+.icon-basecamp:before { content: "\f103"; }
+.icon-behance:before { content: "\f104"; }
+.icon-blogger:before { content: "\f105"; }
+.icon-cargo:before { content: "\f106"; }
+.icon-cloudapp:before { content: "\f107"; }
+.icon-creativecommons:before { content: "\f108"; }
+.icon-dailybooth:before { content: "\f109"; }
+.icon-delicious:before { content: "\f10a"; }
+.icon-designmoo:before { content: "\f10b"; }
+.icon-digg:before { content: "\f10c"; }
+.icon-dribbble:before { content: "\f10d"; }
+.icon-dropbox:before { content: "\f10e"; }
+.icon-email:before { content: "\f10f"; }
+.icon-etsy:before { content: "\f110"; }
+.icon-evernote:before { content: "\f111"; }
+.icon-facebook:before { content: "\f112"; }
+.icon-flickr:before { content: "\f113"; }
+.icon-forrst:before { content: "\f114"; }
+.icon-foursquare:before { content: "\f115"; }
+.icon-github:before { content: "\f116"; }
+.icon-goodreads:before { content: "\f117"; }
+.icon-googleplus:before { content: "\f118"; }
+.icon-instagram:before { content: "\f119"; }
+.icon-instapaper:before { content: "\f11a"; }
+.icon-linkedin:before { content: "\f11b"; }
+.icon-path:before { content: "\f11c"; }
+.icon-paypal:before { content: "\f11d"; }
+.icon-pinboard:before { content: "\f11e"; }
+.icon-pinterest:before { content: "\f11f"; }
+.icon-quora:before { content: "\f120"; }
+.icon-readernaut:before { content: "\f121"; }
+.icon-reddit:before { content: "\f122"; }
+.icon-rss:before { content: "\f123"; }
+.icon-skype:before { content: "\f124"; }
+.icon-squarespace:before { content: "\f125"; }
+.icon-tumblr:before { content: "\f126"; }
+.icon-twitter:before { content: "\f127"; }
+.icon-vimeo:before { content: "\f128"; }
+.icon-wikipedia:before { content: "\f129"; }
+.icon-wordpress:before { content: "\f12a"; }
+.icon-xbox:before { content: "\f12b"; }
+.icon-yahoomessenger:before { content: "\f12c"; }
+.icon-youtube:before { content: "\f12d"; }
+.icon-zerply:before { content: "\f12e"; }
+.icon-zootool:before { content: "\f12f"; }

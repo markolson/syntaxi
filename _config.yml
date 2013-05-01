@@ -9,4 +9,4 @@ future:      true
 lsi:         false
 pygments:    true
 markdown:    redcarpet
-permalink:   date
+permalink:   /:year/:month/:day/:title
