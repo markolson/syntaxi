@@ -9,6 +9,7 @@ versions:
       version: '12.04'
     - name: RVM
       version: 1.17.10
+alias: [/2012/12/21/installing-prebuilt-binaries-with-rvm/index.html, /2012/12/21/installing-binaries-with-rvm/]
 ---
 
 I've been working with a lot of virtual machines lately, and using RVM to install the version of ruby I need took longer than installing the base system. If you go through the motions of `rvm install {VERSION}`, you might just gloss over this message:

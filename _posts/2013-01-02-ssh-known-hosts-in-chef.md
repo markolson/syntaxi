@@ -1,7 +1,8 @@
 ---
+layout: post
 title: SSH Authentication with Chef
 date: '2013-01-02'
-description: Opscode's Chef documentation wraps SSH instead of configuring it. Here's how to configure it.
+description: Chef's documentation describes how to wrap SSH instead of configuring it. Here's how to configure it.
 
 categories: ['chef', 'ssh']
 versions:

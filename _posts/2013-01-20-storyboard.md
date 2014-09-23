@@ -1,7 +1,9 @@
 ---
+
+layout: post
 title : Storyboard
 moretitle: Read the TV and Movies you don't want to watch
-description: Storyboard Generates Books From Subtitled Video Files
+description: Turning videos into readable PDFs and ePUBs isn't as hard as you'd think. Not that you'd ever thought of doing that though, since it's sort of insane.
 image: storyboard/sample1.jpg
 date: '2013-01-20'
 versions:

@@ -2,7 +2,7 @@
 layout: post
 title: So Why Can't Twitter Keep Track of My Direct Messages?
 date: '2013-04-20'
-description:
+description: Before they added support for their web and first client apps, Twitter DMs didn't sync across devices. Highly annoying, but there are reasons their API doesn't support it.
 categories: ['api']
 ---
 <blockquote class="twitter-tweet" data-conversation="none"><p>Remembering that a user has read a Twitter direct message is the hardest problem in computer science.</p>&mdash; Robin Ward (@evil_trout) <a href="https://twitter.com/evil_trout/status/317528358751711232">March 29, 2013</a></blockquote>

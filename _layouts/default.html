@@ -5,24 +5,34 @@
    <title>{{ page.title }}</title>
    <link rel="stylesheet" href="/assets/link/base.css" />
    <link rel="stylesheet" href="/assets/link/code.css" />
-   <link rel="stylesheet" href="/assets/link/social.css" />
+   <link rel="stylesheet" href="/assets/link/font-awesome.min.css" />
    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<header>
-  <nav>
-    <ul>
-      <li><a href="/">Notes</a></li>
-      <li><a href="/archive">Archives</a></li>
-      <li><a href="/card">Side Projects</a></li>
-      <li class="social"><a href="https://twitter.com/mark_olson" target="_blank" title="Mark Olson" class="icon-twitter"></a></li>
-      <li class="social"><a href="https://github.com/markolson" target="_blank" title="Mark Olson" class="icon-github"></a></li>
-    </ul>
-  </nav>
-  <hr />
-</header>
-<div id="body">
+<header><a href="/">Syntaxi</a></header>
+<nav>
+  <a href="https://twitter.com/mark_olson" title="@mark_olson on Twitter" class="fa fa-twitter"></a>
+  <a href="https://github.com/markolson" title="markolson on Github" class="fa fa-github"></a>
+  <a href="mailto:theothermarkolson@gmail.com" title="Email" class="fa fa-inbox"></a>
+  <a href="https://www.linkedin.com/in/theothermarkolson" title="Linked In" class="fa fa-linkedin"></a>
+</nav>
+
+<div id="content">
 {{ content }}
 </div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-37187293-1', 'syntaxi.net');
+  ga('send', 'pageview');
+
+</script>
+
+
 </body>
 </html>

@@ -2,7 +2,7 @@
 layout: post
 title: Let's Explore Kickstarter's API
 date: '2013-03-24'
-description: Kickstarter hasn't documented their API, but their iOS app uses one...
+description: Kickstarter hasn't documented (or released) an official API, but they've built one for their iOS app to use. Discovering and exploring it with a proxy was fun.
 categories: ['api']
 ---
 

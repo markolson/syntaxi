@@ -1,6 +1,8 @@
 ---
+
+layout: post
 title : Storyboard - Now with more GIFs (and unicode)
-description: Storyboard Generates Books and GIFs From Subtitled Video Files
+description: Building on the work already done for parsing subtitles and exporting images, Storyboard gains GIF support. And some better unicode support as well.
 date: '2013-02-03'
 versions:
   - name: Storyboard
