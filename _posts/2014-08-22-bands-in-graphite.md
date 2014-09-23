@@ -16,7 +16,7 @@ To start, I'd have a normal chart showing something getting measured. I'd separa
 
      render?target=alias(metric.name, 'data')&yMin=0&yMax=100
 
-<img src="https://localhost:8443/render/?target=alias(scale(collectd.graphite.cpu-0.cpu-user,30),'data')&template=grafana&yMin=0&yMax=100&height=150&width=800&from=-30minutes" alt="render?target=alias(metric.name, 'data')" />
+<img src="/assets/media/graphite-error-bands/render-1.png" />
 
 What the triggered alerts didn't easily show me was if there was any pattern to the metric crossing that threshold - was it correlated with another metric? a time of day? They could show me timestamps of a few past events, but that was it. With `constantLine`, I could overlay a simple line at a y-value that lined up with the 'danger' and 'critical' thresholds the alerts were sent out at.
 
@@ -26,7 +26,7 @@ Zooming out on a metric, I could eyeball patterns, or add metrics targets to be 
     &target=alias(color(constantLine(75), 'yellow'), 'danger')
     &target=alias(color(constantLine(90), 'red'), 'error')
 
-<img src="https://localhost:8443/render/?target=alias(scale(collectd.graphite.cpu-0.cpu-user,30),'data')&template=grafana&yMin=0&yMax=100&height=150&width=800&target=alias(color(constantLine(90), 'red'), 'error')&target=alias(color(constantLine(75), 'yellow'), 'danger')&from=-30minutes" />
+<img src="/assets/media/graphite-error-bands/render-2.png" />
 
 That works, but dang if that yellow isn't hard to see. Both lines can also be hard to make out of there are lots metrics in the graph, which reduces their usefulness. Graphite has `areaBetween`, which lets you set a background color (and label) that goes between 2 other metrics, which sounded perfect. 
 
@@ -34,6 +34,6 @@ That works, but dang if that yellow isn't hard to see. Both lines can also be ha
     &target=alpha(color(alias(areaBetween(group(constantLine(70),constantLine(90))),""),"yellow"),0.5)
     &target=alpha(color(alias(areaBetween(group(constantLine(90),constantLine(100))),""),"red"),0.5)
 
-<img src="https://localhost:8443/render/?target=alias(scale(collectd.graphite.cpu-0.cpu-user,30),'data')&template=grafana&yMin=0&yMax=100&height=150&width=800&target=alpha(color(alias(areaBetween(group(constantLine(70),constantLine(90))),%22%22),%22yellow%22),0.5)&target=alpha(color(alias(areaBetween(group(constantLine(90),constantLine(100))),%22%22),%22red%22),0.5)&from=-30minutes" />
+<img src="/assets/media/graphite-error-bands/render-3.png" />
 
 Before 0.9.13, trying to use `areaBetween` with `constantLine`s failed with a bit of a cryptic (to an end-user) error. Eventually I dug in, [made a patch](https://github.com/graphite-project/graphite-web/pull/897/files) and happily got it accepted, letting me make my silly graphs. I used a nameless `alias` in this because to me, the meaning of yellow and red backgrounds is known, whereas the `constantLine`s alone could be misinterpreted as metrics.
