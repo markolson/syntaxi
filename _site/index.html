@@ -21,8 +21,18 @@
 <ul class="post_lists">
 
     <li>
-    <a href="/2014/08/22/bands-in-graphite">Creating Error Bands with Graphite</a> <time>22 August 2014</time>
-    <p>Get some 'simple' caution, danger, or error bands with Graphite for when you want to see your thresholds as more than just a single line.</p>
+    <a href="/2016/02/01/profiling-and-pry-debugging-elixir">Profile and Pry-Debugging Elixir</a> <time>01 February 2016</time>
+    <p></p>
+    </li>
+
+    <li>
+    <a href="/2014/08/22/embedding-raw-data-in-graphite-renders">Embedding Raw Data in Graphite Renders</a> <time>22 August 2014</time>
+    <p></p>
+    </li>
+
+    <li>
+    <a href="/2014/08/22/coloring-in-thresholds-with-graphite">Coloring in Thresholds with Graphite</a> <time>22 August 2014</time>
+    <p>Get some 'simple' filled in caution, danger, or error thresholds with Graphite for when you want to see your thresholds as more than just a single line.</p>
     </li>
 
     <li>
@@ -72,34 +82,123 @@
     
         <article>
             <h1>
-                <time>22 August 2014</time>
-                <a href="/2014/08/22/bands-in-graphite">Creating Error Bands with Graphite</a>
+                <time>01 February 2016</time>
+                <a href="/2016/02/01/profiling-and-pry-debugging-elixir">Profile and Pry-Debugging Elixir</a>
             </h1>
             <div class="content">
-                <p>In the (long) upcoming <a href="https://github.com/graphite-project/graphite-web/blob/master/docs/releases/0_9_13.rst">0.9.3 release</a> of Graphite, I made a quick patch for a small problem that I&#39;d been itching for fix for a while - adding error bands on graphs. While I love having my email and chat slammed with threshold alerts, I&#39;ve also thought it would be nice to see a historical perspective of those thresholds in the charts. The end solution is decidedly <em>not</em> pretty, but it&#39;s functional and gives me something useful to look at.</p>
+                <p>In my heart of hearts, I&#39;m a &#39;printf&#39; debugger, where my first solution to any
+problem is just throwing godawful amounts of <code>puts</code> in Ruby, <code>print</code>s in Python,
+<code>IO.inspect</code>s in Elixir,  <code>console.log</code> in Javascript, and whatever else I can
+do to generate a wall of text saying &quot;OK HERE NOW&quot; or &quot;IT WORKED! GOT TO STEP 3&quot;.</p>
+
+<p>Somewhat surprisingly, this doesn&#39;t always work, and that&#39;s where things like
+<code>pry</code> in Ruby come in. Elixir also has a <code>pry</code> command, which is pretty simple
+to use.</p>
+
+<h2>Pry-Debugging</h2>
+
+<div class="highlight"><pre><code class="elixir"><span class="kn">require</span> <span class="no">IEx</span><span class="p">;</span> <span class="no">IEx</span><span class="o">.</span><span class="n">pry</span>
+</code></pre></div>
+
+<p>And that&#39;s it. As far as I&#39;m aware IEx&#39;s pry doesn&#39;t support any of the extra
+commands that Ruby&#39;s pry does (like <code>whereami</code>, <code>find-method</code>, etc...) but at
+least you can get a peek of what all the local variables in a method are. Which
+is super useful.</p>
+
+<p>To get Elixir&#39;s pry working you have to run the script through IEx with using
+the <code>-s</code> flag. For tests, this means instead of <code>mix test</code> you do
+<code>iex -S mix test</code>. When the execution hits the <code>IEx.pry</code> call, IEx will prompt
+asking</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">  Request to pry #PID&lt;0.315.0&gt; at test/pry_test.exs:8. Allow? [Yn]
+</code></pre></div>
+<p>Once running, you&#39;ll be in a shell where you can access the local variables and
+inspect them or pass them around to different functions. Unfortunately, after a
+minute you&#39;ll get this error:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">     ** (ExUnit.TimeoutError) test timed out after 60000ms. You can change the timeout:
+
+       1. per test by setting &quot;@tag timeout: x&quot;
+       2. per case by setting &quot;@moduletag timeout: x&quot;
+       3. globally via &quot;ExUnit.start(timeout: x)&quot; configuration
+       4. or set it to infinity per run by calling &quot;mix test --trace&quot;
+          (useful when using IEx.pry)
+
+     Timeouts are given as integers in milliseconds.
+</code></pre></div>
+<p>Thankfully, this explains what to do: Just change the command to
+<code>iex -S mix test --trace</code> and you&#39;ll avoid the timeout. Elixir&#39;s docs can really
+be 💯 sometimes. When you&#39;re done using IEx&#39;s pry, enter <code>respawn</code> in the
+console to continue where the program left off.</p>
+
+<h2>Profiling</h2>
+
+<p>Elixir 1.1 added the <a href="http://elixir-lang.org/docs/v1.1/mix/Mix.Tasks.Profile.Fprof.html">Fprof</a>
+mix task, which formats profiling code a bit nicer than the default Erlang
+formatting. It&#39;s easy enough to use the wrapper method that the mix task uses to
+profile whatever snippet of code you want:</p>
+
+<div class="highlight"><pre><code class="elixir">  <span class="no">Mix</span><span class="o">.</span><span class="no">Tasks</span><span class="o">.</span><span class="no">Profile</span><span class="o">.</span><span class="no">Fprof</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span>
+    <span class="k">fn</span> <span class="o">-&gt;</span> <span class="no">YourModule</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">end</span><span class="p">,</span>
+    <span class="p">[</span><span class="ss">sort:</span> <span class="s2">&quot;own&quot;</span><span class="p">,</span> <span class="ss">callers:</span> <span class="no">true</span><span class="p">]</span>
+  <span class="p">)</span>
+</code></pre></div>
+
+<p>The last param is the keyword list of arguments, which you are described in the
+docs for the Fprof mix task. I would like this to provide some more options so
+that it&#39;s more in line with <code>ruby-prof</code>, which can output in different formats
+so that it can be used by other tools, so hopefully someone else works on that
+before it becomes an itch that I have to scratch.</p>
+
+<p>Anywho, I hope this helps you debug and optimize your stuff, weary Elixir
+searcher</p>
+
+            </div>
+        </article>
+    
+        <article>
+            <h1>
+                <time>22 August 2014</time>
+                <a href="/2014/08/22/embedding-raw-data-in-graphite-renders">Embedding Raw Data in Graphite Renders</a>
+            </h1>
+            <div class="content">
+                <p><img src="/assets/media/graphite-embedding/render.png" /></p>
+
+<p>How you take snapshots of single metric charts, or, entire dashboards, is an interesting problem to me. Because the raw metrics are eventually rolled up into larger and larger aggregations before being dropped entirely, if something &#39;interesting&#39; happens that you&#39;ll want to reference for the future, you have to export the raw data - the image just won&#39;t do. While the image can be reconstructed using the raw data, the opposite isn&#39;t true. I can squint at the image above trying to figure out what the current was at 13:30, but that&#39;s a fools errand.</p>
+
+<p>As it happens, it&#39;s not terribly difficult to get Graphite to store the raw metrics along with the rendered image. The above image was rendered by Graphite with <a href="https://gist.github.com/markolson/ecd6e46a9bea9878b3d1#file-embed-patch">this small patch</a> applied to it. It&#39;s also pretty simple to make a <a href="https://gist.github.com/markolson/ecd6e46a9bea9878b3d1#file-parser-rb">simple PNG parser</a> that can pull out data in <code>tEXt</code> chunks, getting the metric name and timeseries points. Of course, running <code>strings</code> on the file can get you that as well, since it&#39;s stored in plain text.</p>
+
+<p>I have no idea if this is actually useful, but there&#39;s something appealing to me about being able to more easily keep raw data with visualizations. I doubt that I&#39;ll clean this up and make it into an actual PR for Graphite - the dependency on PIL is a bit much for such a small thing, and even though PNG is simple enough that you could drop the right bytes in with some string manipulation, that feels too dirty to actually do. Still, I like this idea.</p>
+
+            </div>
+        </article>
+    
+        <article>
+            <h1>
+                <time>22 August 2014</time>
+                <a href="/2014/08/22/coloring-in-thresholds-with-graphite">Coloring in Thresholds with Graphite</a>
+            </h1>
+            <div class="content">
+                <p>In the upcoming <a href="https://github.com/graphite-project/graphite-web/blob/master/docs/releases/0_9_13.rst">0.9.3 release</a> of Graphite, I got a quick patch in for a small problem that stopped me from doing something I&#39;d wanted for a bit - adding error thresholds on charts. While I love having my email and chat slammed with threshold alerts, I&#39;ve also thought it would be nice to see a historical perspective of those thresholds in the charts. The end solution is decidedly <em>not</em> pretty, but it&#39;s functional and gives me something useful to look at.</p>
 
 <p>To start, I&#39;d have a normal chart showing something getting measured. I&#39;d separately have threshold alerts on this, either collecting the metric independently or pulling json data from graphite.</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text"> render?target=alias(metric.name, &#39;data&#39;)&amp;yMin=0&amp;yMax=100
 </code></pre></div>
-<p><img src="https://localhost:8443/render/?target=alias(scale(collectd.graphite.cpu-0.cpu-user,30),'data')&template=grafana&yMin=0&yMax=100&height=150&width=800&from=-30minutes" alt="render?target=alias(metric.name, 'data')" /></p>
+<p><img src="/assets/media/graphite-error-bands/render-1.png" /></p>
 
-<p>What the triggered alerts didn&#39;t easily show me was if there was any pattern to the metric crossing that threshold - was it correlated with another metric? a time of day? They could show me timestamps of a few past events, but that was it. With <code>constantLine</code>, I could overlay a simple line at a y-value that lined up with the &#39;danger&#39; and &#39;critical&#39; thresholds the alerts were sent out at.</p>
-
-<p>Zooming out on a metric, I could eyeball patterns, or add metrics targets to be rendered.</p>
+<p>What the triggered alerts didn&#39;t easily show me was if there was any pattern to the metric crossing that threshold - was it correlated with another metric? a time of day? They could show me timestamps of a few past events, but that was it. With <code>constantLine</code>, I could overlay a simple line at a y-value that lined up with the &#39;danger&#39; and &#39;critical&#39; thresholds the alerts were sent out at. Zooming out on a chart like this, I could eyeball patterns or add additional metrics to look for correlations.</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">render?target=alias(metric.name, &#39;data&#39;)&amp;yMin=0&amp;yMax=100
 &amp;target=alias(color(constantLine(75), &#39;yellow&#39;), &#39;danger&#39;)
 &amp;target=alias(color(constantLine(90), &#39;red&#39;), &#39;error&#39;)
 </code></pre></div>
-<p><img src="https://localhost:8443/render/?target=alias(scale(collectd.graphite.cpu-0.cpu-user,30),'data')&template=grafana&yMin=0&yMax=100&height=150&width=800&target=alias(color(constantLine(90), 'red'), 'error')&target=alias(color(constantLine(75), 'yellow'), 'danger')&from=-30minutes" /></p>
+<p><img src="/assets/media/graphite-error-bands/render-2.png" /></p>
 
-<p>That works, but dang if that yellow isn&#39;t hard to see. Both lines can also be hard to make out of there are lots metrics in the graph, which reduces their usefulness. Graphite has <code>areaBetween</code>, which lets you set a background color (and label) that goes between 2 other metrics, which sounded perfect. </p>
+<p>While that works, the lines can get lost if there are lots of metrics, and the yellow line isn&#39;t the greatest. Graphite has <code>areaBetween</code>, which lets you set a background color (and label) that goes between 2 other metrics, and that&#39;s exactly what I wanted. Before 0.9.13, trying to use <code>areaBetween</code> with <code>constantLine</code>s failed with a bit of a cryptic (to an end-user) error. Eventually I dug in, <a href="https://github.com/graphite-project/graphite-web/pull/897/files">made a patch</a> and happily got it accepted, letting me make my silly charts. I used a nameless <code>alias</code> in this because to me, the meaning of yellow and red backgrounds is known, whereas the <code>constantLine</code>s alone could be misinterpreted as metrics.</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">render?target=alias(metric.name, &#39;data&#39;)&amp;yMin=0&amp;yMax=100
 &amp;target=alpha(color(alias(areaBetween(group(constantLine(70),constantLine(90))),&quot;&quot;),&quot;yellow&quot;),0.5)
 &amp;target=alpha(color(alias(areaBetween(group(constantLine(90),constantLine(100))),&quot;&quot;),&quot;red&quot;),0.5)
 </code></pre></div>
-<p><img src="https://localhost:8443/render/?target=alias(scale(collectd.graphite.cpu-0.cpu-user,30),'data')&template=grafana&yMin=0&yMax=100&height=150&width=800&target=alpha(color(alias(areaBetween(group(constantLine(70),constantLine(90))),%22%22),%22yellow%22),0.5)&target=alpha(color(alias(areaBetween(group(constantLine(90),constantLine(100))),%22%22),%22red%22),0.5)&from=-30minutes" /></p>
+<p><img src="/assets/media/graphite-error-bands/render-3.png" /></p>
 
-<p>Before 0.9.13, trying to use <code>areaBetween</code> with <code>constantLine</code>s failed with a bit of a cryptic (to an end-user) error. Eventually I dug in, <a href="https://github.com/graphite-project/graphite-web/pull/897/files">made a patch</a> and happily got it accepted, letting me make my silly graphs. I used a nameless <code>alias</code> in this because to me, the meaning of yellow and red backgrounds is known, whereas the <code>constantLine</code>s alone could be misinterpreted as metrics.</p>
+<p>So yeah, I&#39;ve got my ranges now and dipped my toe into contributing to the Graphite project. Open source is neat.</p>
 
             </div>
         </article>
