@@ -1,7 +1,6 @@
-ruby '2.1.2'
 source 'https://rubygems.org'
 
-gem 'jekyll', '= 1.4.2'
+gem 'jekyll', '~>1.0'
 gem 'redcarpet'
 gem 'RedCloth'
 
