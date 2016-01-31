@@ -2,7 +2,7 @@
 layout: post
 title: "Profile and Pry-Debugging Elixir"
 date: '2016-02-01'
-description:
+description: "In my heart of hearts, I'm a 'printf' debugger. Sometimes I remember that I should profile code and pry into it, though."
 categories: ['elixir']
 newb: true
 versions:
